@@ -1,21 +1,15 @@
 <div class="container">
-  <header class="app-header">
-    <div class="brand" (click)="goHome()">Survey Master</div>
-    <div class="nav">
-      <div *ngIf="currentUser" class="small">{{ currentUser.username }}</div>
-      <button class="btn btn-muted" (click)="logout()">Logout</button>
-    </div>
-  </header>
 
   <div style="display:flex;align-items:center;justify-content:space-between;margin:20px 0">
     <div>
       <h2 style="margin:0">My Dashboard</h2>
-      <div class="small">Manage your surveys</div>
+      <div class="medium">Manage your surveys</div>
     </div>
     <div>
       <button class="btn btn-primary" (click)="createNewSurvey()">Create New Survey</button>
     </div>
   </div>
+  <div *ngIf="!currentUser" class="card small" style="margin-bottom:12px;background:transparent;border:1px dashed var(--muted);">You are viewing the dashboard anonymously — surveys you create will be named 'anonymous'.</div>
 
   <section>
     <h3 style="margin:14px 0">My Surveys</h3>
@@ -23,6 +17,7 @@
       <div *ngFor="let survey of mySurveys" class="card">
         <div class="meta">{{ getResponseCount(survey.id) }} responses • {{ survey.questions.length }} questions</div>
         <h4>{{ survey.title }}</h4>
+        <div class="small">By {{ survey.creatorName || (survey.creatorId === 'anonymous' ? 'Anonymous' : survey.creatorName || survey.creatorId) }}</div>
         <p>{{ survey.description }}</p>
         <div class="actions" style="margin-top:12px">
           <button class="btn btn-ghost" (click)="editSurvey(survey.id)">Edit</button>

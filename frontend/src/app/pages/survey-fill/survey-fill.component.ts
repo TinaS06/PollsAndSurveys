@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { SurveyService } from '../../services/survey.service';
 import { AuthService } from '../../services/auth.service';
 import { Survey, User } from '../../models';
@@ -18,12 +19,14 @@ export class SurveyFillComponent implements OnInit {
   currentUser: User | null = null;
 
   answers: Record<number, any> = {};
+  
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private surveyService: SurveyService,
     private authService: AuthService
+    , private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +53,11 @@ export class SurveyFillComponent implements OnInit {
     };
 
     this.surveyService.saveResponse(this.survey.id, response);
-    alert('Submitted!');
+    alert('Thanks! Your response has been submitted.');
     this.router.navigate(['/home']);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

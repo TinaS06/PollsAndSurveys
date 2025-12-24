@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { User } from '../models';
 
 @Injectable({
@@ -6,9 +7,11 @@ import { User } from '../models';
 })
 export class AuthService {
   private currentUser: User | null = null;
+  public currentUser$ = new BehaviorSubject<User | null>(null);
 
   constructor() {
     this.loadUser();
+    this.currentUser$.next(this.currentUser);
   }
 
   private loadUser() {
@@ -19,17 +22,22 @@ export class AuthService {
   }
 
   login(username: string): User {
+    const clean = username.trim();
+    // Use a stable id derived from the username so returning users keep ownership
+    const stableId = clean.toLowerCase();
     this.currentUser = {
-      id: Date.now().toString(),
-      username: username.trim()
+      id: stableId,
+      username: clean
     };
     localStorage.setItem('user', JSON.stringify(this.currentUser));
+    this.currentUser$.next(this.currentUser);
     return this.currentUser;
   }
 
   logout() {
     this.currentUser = null;
     localStorage.removeItem('user');
+    this.currentUser$.next(this.currentUser);
   }
 
   getCurrentUser(): User | null {

@@ -19,10 +19,15 @@ body{background:var(--bg);color:#0f172a}
 header.app-header{background:transparent;padding:18px 0;display:flex;align-items:center;justify-content:space-between}
 .brand{font-weight:700;color:var(--primary);font-size:1.25rem}
 .nav{display:flex;gap:12px}
-.btn{border:0;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+.btn{border:0;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600;transition:all 160ms ease}
 .btn-primary{background:var(--primary);color:#fff}
 .btn-ghost{background:transparent;color:var(--primary-600);border:1px solid transparent}
 .btn-muted{background:transparent;color:var(--muted)}
+
+.btn:hover{filter:brightness(0.98);transform:translateY(-1px)}
+.btn:active{transform:translateY(0);filter:brightness(0.95)}
+.btn-ghost:hover{background:color-mix(in srgb, var(--primary) 8%, transparent);color:var(--primary-600);border-color:rgba(15,23,42,0.04)}
+.btn-ghost:active{background:color-mix(in srgb, var(--primary) 10%, transparent);opacity:0.95}
 
 .hero{background:linear-gradient(90deg,rgba(79,70,229,0.08),rgba(99,102,241,0.04));padding:48px;border-radius:16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .hero .left{max-width:640px}
@@ -35,7 +40,6 @@ header.app-header{background:transparent;padding:18px 0;display:flex;align-items
 .card h4{margin:0 0 8px 0}
 .card p{margin:0 0 12px 0;color:var(--muted)}
 
-/* form inputs */
 input[type=text],textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;font-size:14px}
 
 .actions{display:flex;gap:8px}
@@ -44,6 +48,5 @@ footer{color:var(--muted);font-size:13px;padding:30px 0;text-align:center}
 
 @media(max-width:720px){.hero{flex-direction:column;align-items:flex-start}}
 
-/* small helpers */
 .small{font-size:13px;color:var(--muted)}
 

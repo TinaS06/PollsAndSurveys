@@ -31,13 +31,7 @@ export class SurveyCreateComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
-    
-    if (!this.currentUser) {
-      this.router.navigate(['/home']);
-      return;
-    }
 
-    // Check if editing existing survey
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.isEditMode = true;
@@ -45,6 +39,14 @@ export class SurveyCreateComponent implements OnInit {
         this.loadSurvey(this.surveyId);
       }
     });
+  }
+
+  trackQuestion(_: number, q: Question) {
+    return q.id;
+  }
+
+  trackOption(index: number, opt: any) {
+    return index;
   }
 
   loadSurvey(id: number) {
@@ -79,7 +81,6 @@ export class SurveyCreateComponent implements OnInit {
       q.options = ['Option 1', 'Option 2'];
     }
   } else {
-    // for text/rating, no options
     q.options = undefined;
   }
 }
@@ -98,7 +99,6 @@ removeOption(questionIndex: number, optionIndex: number): void {
 
   q.options.splice(optionIndex, 1);
 
-  // keep at least 2 options for multiple choice
   if (q.options.length < 2) {
     q.options.push(`Option ${q.options.length + 1}`);
   }
@@ -110,7 +110,7 @@ removeOption(questionIndex: number, optionIndex: number): void {
       return;
     }
 
-    // Validate questions
+    //pls work - validating quest
     for (const question of this.questions) {
       if (!question.text.trim()) {
         alert('All questions must have text.');
@@ -138,15 +138,25 @@ removeOption(questionIndex: number, optionIndex: number): void {
       this.surveyService.createSurvey({
         title: this.title,
         description: this.description,
-        creatorId: this.currentUser!.id,
+        creatorId: this.currentUser ? this.currentUser.id : 'anonymous',
+        creatorName: this.currentUser ? this.currentUser.username : 'Anonymous',
         questions: this.questions
       });
     }
 
-    this.router.navigate(['/dashboard']);
+    // If the user is logged in, go to dashboard; otherwise go home
+    if (this.currentUser) {
+      this.router.navigate(['/dashboard']);
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 
   cancel() {
-    this.router.navigate(['/dashboard']);
+    if (this.currentUser) {
+      this.router.navigate(['/dashboard']);
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 }

@@ -16,7 +16,7 @@ export class SurveyService {
     if (stored) {
       this.surveys = JSON.parse(stored);
     } else {
-      // Seed with example surveys so the app has content on first run
+
       const now = Date.now();
       this.surveys = [
         {
@@ -24,6 +24,7 @@ export class SurveyService {
           title: 'Customer Satisfaction Survey',
           description: 'Help us improve by answering a few quick questions.',
           creatorId: 'system',
+          creatorName: 'System',
           createdAt: new Date().toISOString(),
           questions: [
             { id: 1, text: 'How satisfied are you with our product?', type: 'rating' },
@@ -36,6 +37,7 @@ export class SurveyService {
           title: 'Event Feedback',
           description: 'Tell us about your experience at our recent event.',
           creatorId: 'system',
+          creatorName: 'System',
           createdAt: new Date().toISOString(),
           questions: [
             { id: 11, text: 'Rate the event overall', type: 'rating' },
@@ -51,7 +53,7 @@ export class SurveyService {
     localStorage.setItem('surveys', JSON.stringify(this.surveys));
   }
 
-  // ---------- Surveys ----------
+
   getAllSurveys(): Survey[] {
     return this.surveys;
   }
@@ -65,7 +67,6 @@ export class SurveyService {
   }
 
   getPublicSurveys(userId: string | null): Survey[] {
-    // if userId is null -> show all surveys
     if (!userId) return this.surveys;
     return this.surveys.filter(s => s.creatorId !== userId);
   }
@@ -97,14 +98,12 @@ export class SurveyService {
 
     if (this.surveys.length === before) return false;
 
-    // also delete stored responses for that survey
     localStorage.removeItem(this.responsesKey(id));
 
     this.saveSurveys();
     return true;
   }
 
-  // ---------- Responses (stored separately per survey) ----------
   private responsesKey(surveyId: number): string {
     return `responses_${surveyId}`;
   }

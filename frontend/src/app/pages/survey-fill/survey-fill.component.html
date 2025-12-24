@@ -1,7 +1,11 @@
 <div class="container">
-  <div *ngIf="survey" class="card" style="max-width:760px;margin:18px auto">
-    <h2 style="margin:0">{{ survey.title }}</h2>
-    <p class="small" style="margin-top:6px">{{ survey.description }}</p>
+  <div *ngIf="survey" style="max-width:760px;margin:18px auto">
+    <div style="margin-bottom:8px">
+      <button class="btn btn-ghost" type="button" (click)="goBack()">← Back</button>
+    </div>
+    <div class="card">
+      <h2 style="margin:0">{{ survey.title }}</h2>
+      <p class="small" style="margin-top:6px">{{ survey.description }}</p>
 
     <div style="margin-top:14px;display:grid;gap:12px">
       <div *ngFor="let q of survey.questions" class="card">
@@ -18,8 +22,15 @@
           </div>
 
           <div *ngIf="q.type === 'rating'" style="display:flex;gap:8px;margin-top:6px;align-items:center">
-            <button class="btn btn-ghost" *ngFor="let r of [1,2,3,4,5]" type="button" (click)="answers[q.id] = r">{{ r }}</button>
-            <span class="small">Selected: {{ answers[q.id] || '-' }}</span>
+            <button
+              class="btn btn-ghost"
+              *ngFor="let r of [1,2,3,4,5]"
+              type="button"
+              (click)="answers[q.id] = r"
+              [class.selected]="answers[q.id] === r"
+            >
+              {{ r }}
+            </button>
           </div>
         </div>
       </div>
@@ -29,4 +40,7 @@
       </div>
     </div>
   </div>
+  
+  <!-- Submission modal -->
+  <!-- submission confirmation is handled via alert() after saving -->
 </div>

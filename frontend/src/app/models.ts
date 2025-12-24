@@ -17,6 +17,7 @@ export interface Survey {
   title: string;
   description: string;
   creatorId: string;
+  creatorName?: string;
   createdAt?: string;
   questions: Question[];
 }

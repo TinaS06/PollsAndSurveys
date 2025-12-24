@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SurveyService } from '../../services/survey.service';
+import { FormatDateTimePipe } from '../../pipes/format-datetime.pipe';
 import { Survey } from '../../models';
 
 @Component({
   selector: 'app-survey-results',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormatDateTimePipe],
   templateUrl: './survey-results.component.html',
   styleUrls: ['./survey-results.component.css']
 })

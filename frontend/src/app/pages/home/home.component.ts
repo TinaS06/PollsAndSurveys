@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { SurveyService } from '../../services/survey.service';
 import { User, Survey } from '../../models';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ import { User, Survey } from '../../models';
 export class HomeComponent implements OnInit {
   currentUser: User | null = null;
   publicSurveys: Survey[] = [];
+  private sub: Subscription | null = null;
 
   constructor(
     private authService: AuthService,
@@ -25,6 +27,15 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
     this.loadPublicSurveys();
+
+    this.sub = this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+      this.loadPublicSurveys();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
   }
 
   loadPublicSurveys() {

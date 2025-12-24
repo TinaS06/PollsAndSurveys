@@ -15,6 +15,7 @@ import { User, Survey } from '../../models';
 export class DashboardComponent implements OnInit {
   currentUser: User | null = null;
   mySurveys: Survey[] = [];
+  
 
   constructor(
     private authService: AuthService,
@@ -28,18 +29,17 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
-    
-    if (!this.currentUser) {
-      this.router.navigate(['/home']);
-      return;
-    }
-    
+
+    // Allow anonymous access: load surveys created by the current user if logged in,
+    // otherwise load surveys created by the anonymous identity.
     this.loadMySurveys();
   }
 
   loadMySurveys() {
     if (this.currentUser) {
       this.mySurveys = this.surveyService.getMySurveys(this.currentUser.id);
+    } else {
+      this.mySurveys = this.surveyService.getMySurveys('anonymous');
     }
   }
 
@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteSurvey(surveyId: number) {
-    if (confirm('Are you sure you want to delete this survey?')) {
+    if (confirm('Delete this survey?')) {
       this.surveyService.deleteSurvey(surveyId);
       this.loadMySurveys();
     }

@@ -26,7 +26,7 @@
 
       <div *ngIf="questions.length === 0" class="card small">No questions yet. Click “Add Question”.</div>
 
-      <div *ngFor="let q of questions; let i = index" class="card" style="margin-top:12px">
+      <div *ngFor="let q of questions; let i = index; trackBy: trackQuestion" class="card" style="margin-top:12px">
         <div style="display:flex;gap:12px;align-items:flex-start">
           <div style="flex:1">
             <label class="small">Question Text</label>
@@ -49,7 +49,7 @@
 
           <div *ngIf="q.type === 'multiple-choice'">
             <label class="small">Options</label>
-            <div *ngFor="let opt of (q.options || []); let oi = index" style="display:flex;gap:8px;margin-top:6px">
+            <div *ngFor="let opt of (q.options || []); let oi = index; trackBy: trackOption" style="display:flex;gap:8px;margin-top:6px">
               <input type="text" [(ngModel)]="q.options![oi]" [name]="'qopt' + i + '_' + oi" placeholder="Option text" />
               <button class="btn" (click)="removeOption(i, oi)" type="button">✕</button>
             </div>

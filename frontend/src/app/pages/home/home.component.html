@@ -1,33 +1,25 @@
 <div class="container">
-  <header class="app-header">
-    <div class="brand" (click)="loadPublicSurveys()">Survey Master</div>
-    <div class="nav">
-      <button *ngIf="currentUser" class="btn btn-ghost" (click)="goToDashboard()">My Dashboard</button>
-      <div *ngIf="currentUser" class="small">{{ currentUser.username }}</div>
-      <button *ngIf="currentUser" class="btn btn-muted" (click)="logout()">Logout</button>
-      <button *ngIf="!currentUser" class="btn btn-primary" (click)="login()">Login</button>
-    </div>
-  </header>
 
   <section class="hero">
     <div class="left">
-      <h2>Create, share and analyze surveys with ease</h2>
+      <h2>Create and analyze surveys with ease</h2>
       <p>Minimal, private and fast — start by trying an example survey below.</p>
       <div style="margin-top:16px">
         <button class="btn btn-primary" (click)="goToDashboard()">Get Started</button>
       </div>
     </div>
     <div>
-      <img src="assets/survey-illustration.svg" alt="surveys" style="max-width:240px;opacity:0.95"/>
+      <img src="assets/surveyandpolls.png" alt="surveys" style="max-width:240px;opacity:0.95"/>
     </div>
   </section>
 
   <section>
     <h3 style="margin:14px 0">Available Surveys</h3>
     <div *ngIf="publicSurveys.length > 0" class="grid">
-      <div *ngFor="let survey of publicSurveys" class="card">
-        <div class="meta">{{ survey.questions.length }} questions</div>
+      <div *ngFor="let survey of publicSurveys" class="card" style="position:relative">
+        <div *ngIf="currentUser && survey.creatorId === currentUser.id" class="badge">Yours</div>
         <h4>{{ survey.title }}</h4>
+        <div class="small">By {{ survey.creatorName || (survey.creatorId === 'anonymous' ? 'Anonymous' : survey.creatorName || survey.creatorId) }}</div>
         <p>{{ survey.description }}</p>
         <div class="actions" style="margin-top:12px">
           <button class="btn btn-primary" (click)="takeSurvey(survey.id)">Take Survey</button>

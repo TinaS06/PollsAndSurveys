@@ -8,7 +8,7 @@
     <div *ngIf="responses.length === 0" class="card" style="margin-top:12px">No responses yet.</div>
 
     <div *ngFor="let r of responses; let i = index" class="card" style="margin-top:12px">
-      <div class="small">Response #{{ i + 1 }} • {{ r.submittedAt }} • User: {{ r.userId || 'Anonymous' }}</div>
+      <div class="small">Response #{{ i + 1 }} • {{ r.submittedAt | formatDateTime }} • User: {{ r.userId || 'Anonymous' }}</div>
       <div style="margin-top:8px;display:grid;gap:8px">
         <div *ngFor="let q of survey.questions">
           <div style="font-weight:600">{{ q.text }}</div>
