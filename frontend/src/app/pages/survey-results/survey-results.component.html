@@ -1,0 +1,20 @@
+<div class="container">
+  <div *ngIf="survey" class="card" style="max-width:860px;margin:18px auto">
+    <h2 style="margin:0">{{ survey.title }} — Results</h2>
+    <p class="small" style="margin-top:6px">{{ survey.description }}</p>
+
+    <div style="margin-top:12px" class="small">Total responses: {{ responses.length }}</div>
+
+    <div *ngIf="responses.length === 0" class="card" style="margin-top:12px">No responses yet.</div>
+
+    <div *ngFor="let r of responses; let i = index" class="card" style="margin-top:12px">
+      <div class="small">Response #{{ i + 1 }} • {{ r.submittedAt }} • User: {{ r.userId || 'Anonymous' }}</div>
+      <div style="margin-top:8px;display:grid;gap:8px">
+        <div *ngFor="let q of survey.questions">
+          <div style="font-weight:600">{{ q.text }}</div>
+          <div>{{ r.answers?.[q.id] ?? '-' }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

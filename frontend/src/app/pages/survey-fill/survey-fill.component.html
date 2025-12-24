@@ -1,0 +1,32 @@
+<div class="container">
+  <div *ngIf="survey" class="card" style="max-width:760px;margin:18px auto">
+    <h2 style="margin:0">{{ survey.title }}</h2>
+    <p class="small" style="margin-top:6px">{{ survey.description }}</p>
+
+    <div style="margin-top:14px;display:grid;gap:12px">
+      <div *ngFor="let q of survey.questions" class="card">
+        <div style="font-weight:600">{{ q.text }}</div>
+
+        <div style="margin-top:8px">
+          <input *ngIf="q.type === 'text'" [(ngModel)]="answers[q.id]" [name]="'q' + q.id" placeholder="Your answer" />
+
+          <div *ngIf="q.type === 'multiple-choice'" style="display:flex;flex-direction:column;gap:6px;margin-top:6px">
+            <label *ngFor="let opt of q.options" style="display:flex;align-items:center;gap:8px">
+              <input type="radio" [(ngModel)]="answers[q.id]" [value]="opt" [name]="'q' + q.id" />
+              <span>{{ opt }}</span>
+            </label>
+          </div>
+
+          <div *ngIf="q.type === 'rating'" style="display:flex;gap:8px;margin-top:6px;align-items:center">
+            <button class="btn btn-ghost" *ngFor="let r of [1,2,3,4,5]" type="button" (click)="answers[q.id] = r">{{ r }}</button>
+            <span class="small">Selected: {{ answers[q.id] || '-' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button class="btn btn-primary" (click)="submit()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

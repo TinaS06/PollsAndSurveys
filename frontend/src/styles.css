@@ -1,1 +1,49 @@
-/* You can add global styles to this file, and also import other style files */
+:root{
+	--bg:#f7f8fb;
+	--card:#ffffff;
+	--muted:#6b7280;
+	--primary:#4f46e5;
+	--primary-600:#4338ca;
+	--success:#10b981;
+	--danger:#ef4444;
+	--radius:12px;
+	--glass: rgba(255,255,255,0.6);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+body{background:var(--bg);color:#0f172a}
+
+.container{max-width:1100px;margin:0 auto;padding:20px}
+
+header.app-header{background:transparent;padding:18px 0;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:700;color:var(--primary);font-size:1.25rem}
+.nav{display:flex;gap:12px}
+.btn{border:0;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-ghost{background:transparent;color:var(--primary-600);border:1px solid transparent}
+.btn-muted{background:transparent;color:var(--muted)}
+
+.hero{background:linear-gradient(90deg,rgba(79,70,229,0.08),rgba(99,102,241,0.04));padding:48px;border-radius:16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.hero .left{max-width:640px}
+.hero h2{margin:0;font-size:28px}
+.hero p{color:var(--muted);margin-top:8px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,42,0.06);}
+.meta{color:var(--muted);font-size:13px;margin-bottom:10px}
+.card h4{margin:0 0 8px 0}
+.card p{margin:0 0 12px 0;color:var(--muted)}
+
+/* form inputs */
+input[type=text],textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;font-size:14px}
+
+.actions{display:flex;gap:8px}
+
+footer{color:var(--muted);font-size:13px;padding:30px 0;text-align:center}
+
+@media(max-width:720px){.hero{flex-direction:column;align-items:flex-start}}
+
+/* small helpers */
+.small{font-size:13px;color:var(--muted)}
+

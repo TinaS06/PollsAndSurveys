@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="card" style="max-width:840px;margin:18px auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <h2 style="margin:0">{{ isEditMode ? 'Edit Survey' : 'Create New Survey' }}</h2>
+      <div>
+        <button class="btn btn-ghost" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+
+    <div style="display:grid;gap:12px">
+      <div>
+        <label class="small">Title</label>
+        <input type="text" [(ngModel)]="title" name="title" placeholder="Survey title" />
+      </div>
+      <div>
+        <label class="small">Description</label>
+        <textarea rows="3" [(ngModel)]="description" name="description" placeholder="Survey description"></textarea>
+      </div>
+    </div>
+
+    <div style="margin-top:16px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h3 style="margin:0">Questions</h3>
+        <button class="btn btn-primary" (click)="addQuestion()">+ Add Question</button>
+      </div>
+
+      <div *ngIf="questions.length === 0" class="card small">No questions yet. Click “Add Question”.</div>
+
+      <div *ngFor="let q of questions; let i = index" class="card" style="margin-top:12px">
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="flex:1">
+            <label class="small">Question Text</label>
+            <input type="text" [(ngModel)]="q.text" [name]="'qtext' + i" placeholder="Type your question..." />
+          </div>
+          <div>
+            <button class="btn" style="color:var(--danger)" (click)="removeQuestion(i)">Remove</button>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px">
+          <div>
+            <label class="small">Type</label>
+            <select [(ngModel)]="q.type" (change)="onQuestionTypeChange(i)" [name]="'qtype' + i">
+              <option value="text">Text</option>
+              <option value="multiple-choice">Multiple Choice</option>
+              <option value="rating">Rating (1–5)</option>
+            </select>
+          </div>
+
+          <div *ngIf="q.type === 'multiple-choice'">
+            <label class="small">Options</label>
+            <div *ngFor="let opt of (q.options || []); let oi = index" style="display:flex;gap:8px;margin-top:6px">
+              <input type="text" [(ngModel)]="q.options![oi]" [name]="'qopt' + i + '_' + oi" placeholder="Option text" />
+              <button class="btn" (click)="removeOption(i, oi)" type="button">✕</button>
+            </div>
+            <div style="margin-top:8px"><button class="btn btn-ghost" (click)="addOption(i)" type="button">+ Add Option</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;text-align:right">
+      <button class="btn btn-primary" (click)="saveSurvey()">{{ isEditMode ? 'Save Changes' : 'Create Survey' }}</button>
+    </div>
+  </div>
+</div>
