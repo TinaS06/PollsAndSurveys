@@ -11,6 +11,7 @@ http://localhost:4200
 - TypeScript
 - HTML & CSS
 - Angular Router
+- RxJS (BehaviorSubject)
 - LocalStorage 
 
 # Key Features
@@ -51,11 +52,11 @@ No external backend or database is used. All data is stored locally in the brows
 This approach simplifies the setup and it makes the application easy to run locally.
 
 # Authentication
-Authentication is intentionally lightweight:
+Authentication is lightweight:
 - Users log in by entering a username
 - A stable user ID is generated from the username
 - Anonymous users are also supported
-- Logged in users can manage their own surveys
+- Logged in users can manage their own surveys (their login username is also shown)
 - Anonymous users can still take surveys and create surveys labeled as “Anonymous”
 
 # Usage Notes
