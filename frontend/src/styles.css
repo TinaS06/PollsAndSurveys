@@ -29,6 +29,10 @@ header.app-header{background:transparent;padding:18px 0;display:flex;align-items
 .btn-ghost:hover{background:color-mix(in srgb, var(--primary) 8%, transparent);color:var(--primary-600);border-color:rgba(15,23,42,0.04)}
 .btn-ghost:active{background:color-mix(in srgb, var(--primary) 10%, transparent);opacity:0.95}
 
+.btn-danger{background:transparent;color:var(--danger)}
+.btn-danger:hover{background:var(--primary);color:#fff}
+.btn-danger:active{background:color-mix(in srgb, var(--primary) 90%, transparent);color:#fff;opacity:0.95}
+
 .hero{background:linear-gradient(90deg,rgba(79,70,229,0.08),rgba(99,102,241,0.04));padding:48px;border-radius:16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .hero .left{max-width:640px}
 .hero h2{margin:0;font-size:28px}

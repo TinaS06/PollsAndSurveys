@@ -11,15 +11,14 @@ import { User } from './models';
   template: `
     <header class="app-header">
       <div style="display:flex;align-items:center;gap:12px">
-        <img src="assets/logo.svg" alt="logo" style="width:36px;height:36px;border-radius:8px;" />
-        <div style="font-weight:700;color:var(--primary)">{{ title }}</div>
+        <a routerLink="/home" class="brand" style="text-decoration:none;color:var(--primary);font-weight:700">{{ title }}</a>
       </div>
       <nav class="nav">
         <a routerLink="/home" class="btn btn-ghost" style="padding:6px 10px">Home</a>
         <a routerLink="/dashboard" class="btn btn-ghost" style="padding:6px 10px">Dashboard</a>
         <ng-container *ngIf="currentUser; else loggedOut">
           <div class="small" style="margin-left:10px">{{ currentUser.username }}</div>
-          <button class="btn btn-muted" style="margin-left:8px" (click)="logout()">Logout</button>
+          <button class="btn btn-primary" style="margin-left:8px" (click)="logout()">Logout</button>
         </ng-container>
         <ng-template #loggedOut>
           <button class="btn btn-primary" style="margin-left:8px" (click)="login()">Login</button>
