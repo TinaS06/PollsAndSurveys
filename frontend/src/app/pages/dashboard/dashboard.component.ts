@@ -29,9 +29,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
-
-    // Allow anonymous access: load surveys created by the current user if logged in,
-    // otherwise load surveys created by the anonymous identity.
     this.loadMySurveys();
   }
 
@@ -75,4 +72,3 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 }
-
