@@ -1,7 +1,7 @@
 # PollsAndSurveys
 
 # Introduction
-PollsAndSurveys is a single-page web application built with Angular that allows users to easily create, manage, and participate in surveys. What the application supports is that users, whether they are logged in or anonymous, can create custom surveys with different question types, collect responses from users (both logged in and anonymous), and view submitted results in a clear and structured way. The system uses localStorage for data persistence rather than a backend server because it is intended to be lightweight and frontend focused. Because of this, it can be used for research projects, prototypes, and demonstrations of Angular principles like state management, routing, components, and services. The two example surveys are hardcoded on purpose just so first run users can immediately explore the functionality without creating their own survey. 
+PollsAndSurveys is a single-page web application built with Angular that allows users to easily create, manage, and participate in surveys and polls. What the application supports is that users, whether they are logged in or anonymous, can create custom surveys/polls with different question types, collect responses from users (both logged in and anonymous), and view submitted results in a clear and structured way. The system uses localStorage for data persistence rather than a backend server because it is intended to be lightweight and frontend focused. Because of this, it can be used for research projects, prototypes, and demonstrations of Angular principles like state management, routing, components, and services. The two example surveys are hardcoded on purpose just so first run users can immediately explore the functionality without creating their own survey. 
 
 # Base URL
 http://localhost:4200
@@ -15,12 +15,12 @@ http://localhost:4200
 - LocalStorage 
 
 # Key Features
-- Create surveys with a title, description, and multiple questions
+- Create surveys/polls with a title, description, and multiple questions
 - Supported question types: Text input, Multiple choice, Rating (1–5)
-- Edit and delete existing surveys
-- Take surveys as a logged-in or anonymous user
-- Store survey data and responses in the browser using localStorage
-- View survey results with all submitted responses
+- Edit and delete existing surveys/polls
+- Take surveys/polls as a logged-in or anonymous user
+- Store survey/poll data and responses in the browser using localStorage
+- View survey/poll results with all submitted responses
 - Simple user login based on username (no passwords required)
 - Clean and minimal UI optimized for clarity and usability
 
